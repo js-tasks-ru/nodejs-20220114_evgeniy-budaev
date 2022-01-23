@@ -10,6 +10,7 @@ class LineSplitStream extends stream.Transform {
   _transform(chunk, encoding, callback) {
     this.str += chunk;
     const strings = this.str.toString().split(os.EOL);
+    this.str = strings.pop();
 
     if (strings.length > 0) {
       callback(null, strings.shift());
