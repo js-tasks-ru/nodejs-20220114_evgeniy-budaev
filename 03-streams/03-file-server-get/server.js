@@ -19,13 +19,13 @@ server.on('request', (req, res) => {
 
   switch (req.method) {
     case 'GET':
-      fs.createReadStream(filepath)
-          .pipe(res)
-          .on('error', err => {
+        const ourStream =  fs.createReadStream(filepath);
+        ourStream.pipe(res);
+        ourStream.on('error', (err) => {
             if(err.code === 'ENOENT'){
-              res.statusCode = 404;
-              res.end('File not found');
-              return;
+                res.statusCode = 404;
+                res.end('File not found');
+                return;
             }
             res.statusCode = 500;
             res.end('Server error 500');
