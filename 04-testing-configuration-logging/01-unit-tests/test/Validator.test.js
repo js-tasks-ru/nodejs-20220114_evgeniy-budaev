@@ -7,8 +7,8 @@ describe('testing-configuration-logging/unit-tests', () => {
       const validator = new Validator({
         name: {
           type: 'string',
-          min: 10,
-          max: 20,
+          min: 5,
+          max: 10,
         },
       });
 
@@ -59,8 +59,8 @@ describe('testing-configuration-logging/unit-tests', () => {
       const validator = new Validator({
         name: {
           type: 'string',
-          min: 10,
-          max: 20,
+          min: 5,
+          max: 10,
         },
         age: {
           type: 'number',
