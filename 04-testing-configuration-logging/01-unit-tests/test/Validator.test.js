@@ -24,7 +24,7 @@ describe('testing-configuration-logging/unit-tests', () => {
         age: {
           type: 'number',
           min: 18,
-          max: 27,
+          max: 33,
         },
       });
 
@@ -40,7 +40,7 @@ describe('testing-configuration-logging/unit-tests', () => {
         age: {
           type: 'number',
           min: 18,
-          max: 27,
+          max: 33,
         },
       });
 
