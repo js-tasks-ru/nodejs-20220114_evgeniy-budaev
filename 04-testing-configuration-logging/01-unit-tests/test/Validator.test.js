@@ -24,7 +24,7 @@ describe('testing-configuration-logging/unit-tests', () => {
         age: {
           type: 'number',
           min: 18,
-          max: 33,
+          max: 27,
         },
       });
 
@@ -34,13 +34,13 @@ describe('testing-configuration-logging/unit-tests', () => {
       expect(errors[0]).to.have.property('field').and.to.be.equal('age');
       expect(errors[0]).to.have.property('error').and.to.be.equal('too little, expect 18, got 17');
     });
-    
+
     it('валидатор проверяет числовые поля на максимум', () => {
       const validator = new Validator({
         age: {
           type: 'number',
           min: 18,
-          max: 33,
+          max: 27,
         },
       });
 
