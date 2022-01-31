@@ -33,8 +33,8 @@ describe('testing-configuration-logging/unit-tests', () => {
       const validator = new Validator({
         age: {
           type: 'number',
-          min: 10,
-          max: 20,
+          min: 18,
+          max: 27,
         },
       });
 
@@ -64,8 +64,8 @@ describe('testing-configuration-logging/unit-tests', () => {
         },
         age: {
           type: 'number',
-          min: 10,
-          max: 20,
+          min: 18,
+          max: 27,
         },
       });
 
