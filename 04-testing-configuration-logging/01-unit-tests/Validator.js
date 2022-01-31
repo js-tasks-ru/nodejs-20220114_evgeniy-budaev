@@ -25,20 +25,13 @@ module.exports = class Validator {
           if (value.length > rules.max) {
             errors.push({field, error: `too long, expect ${rules.max}, got ${value.length}`});
           }
-          if (/[a-zA-Zа-яА-Я]+$/i.test(value) !== true){
-            errors.push({field, error: `unexpected symbols, got ${value}`});
-            break;
-          }
           break;
         case 'number':
           if (value < rules.min) {
             errors.push({field, error: `too little, expect ${rules.min}, got ${value}`});
           }
           if (value > rules.max) {
-            errors.push({field, error: `too big, expect ${rules.min}, got ${value}`});
-          }
-          if (value % 1 !== 0){
-            errors.push({field, error: `numeric value is not integer - ${value}`});
+            errors.push({field, error: `too big, expect ${rules.max}, got ${value}`});
           }
           break;
       }
@@ -46,4 +39,4 @@ module.exports = class Validator {
 
     return errors;
   }
-};
+}
