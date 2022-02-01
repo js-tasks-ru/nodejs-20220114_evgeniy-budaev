@@ -18,5 +18,38 @@ describe('testing-configuration-logging/unit-tests', () => {
       expect(errors[0]).to.have.property('field').and.to.be.equal('name');
       expect(errors[0]).to.have.property('error').and.to.be.equal('too short, expect 10, got 6');
     });
+
+    it('валидатор проверяет числовые поля на минимум', () => {
+      const validator = new Validator({
+        age: {
+          type: 'number',
+          min: 18,
+          max: 33,
+        },
+      });
+
+      const errors = validator.validate({age: 17});
+
+      expect(errors).to.have.length(1);
+      expect(errors[0]).to.have.property('field').and.to.be.equal('age');
+      expect(errors[0]).to.have.property('error').and.to.be.equal('too little, expect 18, got 17');
+    });
+
+    it('валидатор проверяет числовые поля на максимум', () => {
+      const validator = new Validator({
+        age: {
+          type: 'number',
+          min: 18,
+          max: 33,
+        },
+      });
+
+      const errors = validator.validate({age: 34});
+
+      expect(errors).to.have.length(1);
+      expect(errors[0]).to.have.property('field').and.to.be.equal('age');
+      expect(errors[0]).to.have.property('error').and.to.be.equal('too big, expect 33, got 34');
+    });
+
   });
 });
