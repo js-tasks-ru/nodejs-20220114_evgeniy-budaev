@@ -8,26 +8,34 @@ app.use(require('koa-bodyparser')());
 const Router = require('koa-router');
 const router = new Router();
 
-const resolvers = [];
+let resolvers = [];
 
-router.get('/subscribe', async (ctx) => {
-		return new Promise((resolve) => {
-			const resolver = (message) => {
-				resolve();
-				ctx.body = message;
-			};
-			resolvers.push(resolver);
+function validatePublishBody(ctx, next) {
+	const message = ctx.request.body.message;
+	if (resolvers.length > 0 && message) {
+		resolvers.forEach((resolver) => resolver(message));
+		resolvers = [];
+		return next();
+	} else {
+		ctx.status = 400;
+		ctx.body = 'Not validate data!';
+	}
+}
+
+router.get('/subscribe', async (ctx, next) => {
+		await new Promise((resolve) => {
+			resolvers.push(resolve);
+		}).then((message) => {
+			ctx.status = 200;
+			ctx.body = message;
+			return next();
 		});
 	},
 );
 
-router.post('/publish', async (ctx, next) => {
-	const message = ctx.request.body.message;
-	if (resolvers.length > 0 && message) {
-		resolvers.forEach((resolver) => resolver(message));
-		ctx.status = 204;
-	}
-	return next();
+router.post('/publish', validatePublishBody, async (ctx) => {
+	ctx.status = 204;
+	ctx.body = 'published';
 });
 
 app.use(router.routes());
